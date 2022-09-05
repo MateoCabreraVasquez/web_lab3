@@ -19,10 +19,12 @@ function addKeyOnCLickToEachKey(){
     })
 }
 
+//Procces the entry key
 function onCalculatorKeyPressed(key){
     keyPressedProccesing(key.id);
 }
 
+//Catch the key pressed event
 function keyPressedProccesing(keyId){
  
     switch (keyId) {
@@ -166,28 +168,37 @@ function startCalculateProcess(inValue){
 
 }
 
+//Adecuates the entry form for it to be processed by the math librery
 function adecauateFormatToCalculate(inValue){
     var entry=inValue
     entry=entry.replace("x","*").replace("log","log10").replace("ln","log").replace("e","E").replace("fact","factorial").replace("Ans","("+ans+")")
 
     if(isDegreeOn){
-        entry=entry.replace("sin(","sin((180/PI)*")
-        entry=entry.replace("cos(","cos((180/PI)*")
-        entry=entry.replace("tan(","tan((180/PI)*")
+        
+
+        entry=entry.replace("sin(","sin((PI/180)*")
+        entry=entry.replace("cos(","cos((PI/180)*")
+        entry=entry.replace("tan(","tan((PI/180)*")
+
+        entry=entry.replace("asin((180/PI)*","asin(")
+        entry=entry.replace("acos((180/PI)*","acos(")
+        entry=entry.replace("atan((180/PI)*","atan(")
 
         entry=entry.replace("asin(","(180/PI)*asin(")
         entry=entry.replace("acos(","(180/PI)*acos(")
         entry=entry.replace("atan(","(180/PI)*atan(")
+
     }
     return entry
 }
 
-
+//add a new key to the entry
 function addKeyValueToEntry(keyValue){
     var result=document.getElementById('input')
     result.value=result.value+keyValue
 }
 
+//set mode DEGREE
 function setCalculatorAtDegreeMode(){
     isRadOn=false;
     isDegreeOn=true;
@@ -195,6 +206,7 @@ function setCalculatorAtDegreeMode(){
     setDisableFormat(document.getElementById("key_rad"));
 }
 
+//set mode RAD
 function setCalculatorAtRadMode(){
     isRadOn=true;
     isDegreeOn=false;
@@ -202,6 +214,7 @@ function setCalculatorAtRadMode(){
     setDisableFormat(document.getElementById("key_degree"));
 }
 
+//Change the inv key estate when pressed
 function changeInveseState(){
     isInvOn=!isInvOn
     if(!isInvOn)
@@ -210,11 +223,10 @@ function changeInveseState(){
         setActiveFormat(document.getElementById("key_inverse"));
     
     updateInverseKeys(isInvOn)  
-
 }
 
 
-
+//Reset the entry
 function resetEntry(){document.getElementById('input').value=""}
 
 //Delete the last entry character
@@ -244,16 +256,20 @@ function areBracesOk(str) {
     if(depth > 0) return false;
     return true;
 }
+
+//stablish if one key is available
 function setActiveFormat(key){
     key.classList.add('active_key');
     key.classList.remove('symbolic_key');
 }
 
+//stablish if one key is disable
 function setDisableFormat(key){
     key.classList.add('symbolic_key');
     key.classList.remove('active_key');
 }
 
+// set the state for the inverse keys
 function updateInverseKeys(isInvOn){
     if(isInvOn){
         document.getElementById("key_sin").innerHTML="Sin<sup>-1</sup>"

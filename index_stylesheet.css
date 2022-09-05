@@ -1,0 +1,91 @@
+*{
+    box-sizing: border-box;
+    color: rgb(14, 14, 14);
+    font-size: 1em;
+}
+
+.content{
+    width: 600px;
+}
+
+.row{
+    margin-top:8px;
+    margin-bottom:8px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:space-around;
+}
+
+
+.text_historial{
+    color: gray !important;
+    font-size: 1em !important;   
+    width: 100% !important; 
+    text-align: end; 
+}
+
+.result_operation{
+    font-size: 2em !important;
+    width: 100% !important;
+    display: flex;
+    text-align:end;
+    border: 1px solid rgb(30, 164, 236);
+}
+
+/************************** KEY *********************/
+
+.numeric_key{
+    width: 80px;
+    height: 40px;
+    background-color:rgb(218, 227, 234);
+    border: 1px solid rgb(142, 136, 136);
+}
+
+.symbolic_key{
+    width: 80px;
+    height: 40px;
+    background-color:rgb(183, 176, 176);
+    border: 1px solid rgb(142, 136, 136);
+}
+
+.equal_key{
+    width: 80px;
+    height: 40px;
+    background-color:rgb(30, 164, 236);
+    color: aliceblue !important;
+    border: 1px solid rgb(142, 136, 136);
+}
+
+.active_key{
+  width: 80px;
+  height: 40px;
+  background-color:rgb(215, 74, 201);
+  border: 1px solid rgb(142, 136, 136);
+}
+
+/************************** EFECTS *********************/
+
+.numeric_key:hover {
+    background-color:#DE6FA1;
+  }
+
+.symbolic_key:hover{
+    background-color:#856088;
+    color:aliceblue;
+}
+
+.equal_key:hover {
+    background-color:#2E2D88;
+  }
+
+  .background {
+    width: 150px;
+    display: inline-block;
+    height: 50px;
+    background: #0066dd;
+    padding: 20px;
+  }
+
+
+  

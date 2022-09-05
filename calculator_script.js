@@ -32,7 +32,7 @@ function keyPressedProccesing(keyId){
         case 'key_degree':
             setCalculatorAtDegreeMode();break;
         case 'key_factorial':
-            addKeyValueToEntry("!");break;
+            addKeyValueToEntry("fact(");break;
         case 'key_left_parenthesis':
             addKeyValueToEntry("(");break;
         case 'key_right_parenthesis':
@@ -138,7 +138,7 @@ function keyPressedProccesing(keyId){
 function calculateResul(){
     var inValue=document.getElementById('input').value
 
-    console.log(inValue);
+    console.log(areBracesOk(inValue));
     if(areBracesOk(inValue)){
         
         startCalculateProcess(inValue)
@@ -147,6 +147,7 @@ function calculateResul(){
         window.alert("Parentesis incorrecto");
     }
 
+
 }
 
 
@@ -154,18 +155,19 @@ function calculateResul(){
 
 function startCalculateProcess(inValue){
     var formatedInValue=adecauateFormatToCalculate(inValue);
+
     var resp=math.evaluate(formatedInValue)
     if(resp=!null && resp.length>0){
 
         var historic=document.getElementById("historic")
-        console.log(document);
         document.getElementById("input").value = resp
     }
 }
 
 function adecauateFormatToCalculate(inValue){
     var entry=inValue
-    entry=entry.replace("x","*").replace("log","log10").replace("ln","log").replace("e","E")
+    entry=entry.replace("x","*").replace("log","log10").replace("ln","log").replace("e","E").replace("fact","factorial")
+
     if(isDegreeOn){
         entry=entry.replace("sin(","sin((180/PI)*")
         entry=entry.replace("cos(","cos((180/PI)*")
@@ -178,6 +180,10 @@ function adecauateFormatToCalculate(inValue){
     return entry
 }
 
+function getFactorial(entry){
+    
+
+}
 function addKeyValueToEntry(keyValue){
     var result=document.getElementById('input')
     result.value=result.value+keyValue
@@ -215,31 +221,30 @@ function resetEntry(){document.getElementById('input').value=""}
 //Delete the last entry character
 function deletLastKey(){
     var resultValue=document.getElementById('input')
-    console.log(resultValue.value.length)
     if(resultValue.value.length>0){    
         resultValue.value=resultValue.value.substring(0,resultValue.value.length-1)
     }
 }
 
 
-//Delete the last entry character
-function areBracesOk(braces){
-    let opening = [ '(']
-    let closing = [ ')']
-    let arr = []
-    for (let i = 0; i < braces.length; i++) {
-        if (opening.includes(braces[i])) {
-            arr.push(braces[i])
-        } else
-        if (closing.indexOf(braces[i]) === opening.indexOf(arr[arr.length - 1])) {
-            arr.pop()
-        } else return false
-    
-    console.log(arr.length === 0)
 
-    } return arr.length === 0;
+
+//Check if the parenthesis are balanced inside the string
+function areBracesOk(str) {
+
+    var depth = 0;
+    for(var i in str){   
+        if(str[i] == '('){
+            depth ++;
+        } else if(str[i] == ')') {
+            depth --;
+        }  
+
+        if (depth < 0) return false;
+    }
+    if(depth > 0) return false;
+    return true;
 }
-
 function setActiveFormat(key){
     key.classList.add('active_key');
     key.classList.remove('symbolic_key');

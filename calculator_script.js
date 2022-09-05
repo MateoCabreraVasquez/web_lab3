@@ -5,6 +5,7 @@ var input = "";
 var isRadOn=true;
 var isDegreeOn=false;
 var isInvOn=false;
+var ans= 0;
 
 window.addEventListener('load', function() {
     addKeyOnCLickToEachKey();
@@ -135,37 +136,39 @@ function keyPressedProccesing(keyId){
 
 }
 
+// Button equals clicked
 function calculateResul(){
     var inValue=document.getElementById('input').value
 
-    if(areBracesOk(inValue)){
-        startCalculateProcess(inValue)
-    }
-    else{
-        window.alert("Parentesis incorrecto");
-    }
+    if(!areBracesOk(inValue))   {window.alert("Parentesis incorrecto");}
 
+    else if(inValue.length==0)  {window.alert("Entrada vacia");}
 
+    else{    startCalculateProcess(inValue)}
 }
 
-
-
-
+// Takes the entry and calculates the resul id possible
 function startCalculateProcess(inValue){
-    var formatedInValue=adecauateFormatToCalculate(inValue);
-    var resp=(math.evaluate(formatedInValue))
-    var result= (resp).toString()
-  
-    if(result=!null && result.length>0){
-        console.log(inValue)
-        document.getElementById("historic").innerHTML=inValue;
-        document.getElementById("input").value = resp
+    try{
+        var formatedInValue=adecauateFormatToCalculate(inValue);
+        var resp=(math.evaluate(formatedInValue))
+        var result= (resp).toString()
+      
+        if(result=!null && result.length>0){
+            document.getElementById("historic").innerHTML=inValue;
+            document.getElementById("input").value = resp
+            ans=resp
+        }
     }
+    catch(error) {
+        window.alert("Error en la entrada. Asegurate que lo ingresado sea correcto.");
+    }
+
 }
 
 function adecauateFormatToCalculate(inValue){
     var entry=inValue
-    entry=entry.replace("x","*").replace("log","log10").replace("ln","log").replace("e","E").replace("fact","factorial")
+    entry=entry.replace("x","*").replace("log","log10").replace("ln","log").replace("e","E").replace("fact","factorial").replace("Ans","("+ans+")")
 
     if(isDegreeOn){
         entry=entry.replace("sin(","sin((180/PI)*")

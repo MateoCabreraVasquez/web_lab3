@@ -137,9 +137,7 @@ function keyPressedProccesing(keyId){
 
 function calculateResul(){
     var inValue=document.getElementById('input').value
-    startCalculateProcess(inValue)
 
-    /*
     console.log(inValue);
     if(areBracesOk(inValue)){
         
@@ -149,7 +147,6 @@ function calculateResul(){
         window.alert("Parentesis incorrecto");
     }
 
-*/
 }
 
 
@@ -225,7 +222,7 @@ function deletLastKey(){
 }
 
 
-
+//Delete the last entry character
 function areBracesOk(braces){
     let opening = [ '(']
     let closing = [ ')']
@@ -237,6 +234,9 @@ function areBracesOk(braces){
         if (closing.indexOf(braces[i]) === opening.indexOf(arr[arr.length - 1])) {
             arr.pop()
         } else return false
+    
+    console.log(arr.length === 0)
+
     } return arr.length === 0;
 }
 

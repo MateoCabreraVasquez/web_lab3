@@ -138,9 +138,7 @@ function keyPressedProccesing(keyId){
 function calculateResul(){
     var inValue=document.getElementById('input').value
 
-    console.log(areBracesOk(inValue));
     if(areBracesOk(inValue)){
-        
         startCalculateProcess(inValue)
     }
     else{
@@ -155,11 +153,12 @@ function calculateResul(){
 
 function startCalculateProcess(inValue){
     var formatedInValue=adecauateFormatToCalculate(inValue);
-
-    var resp=math.evaluate(formatedInValue)
-    if(resp=!null && resp.length>0){
-
-        var historic=document.getElementById("historic")
+    var resp=(math.evaluate(formatedInValue))
+    var result= (resp).toString()
+  
+    if(result=!null && result.length>0){
+        console.log(inValue)
+        document.getElementById("historic").innerHTML=inValue;
         document.getElementById("input").value = resp
     }
 }
@@ -180,10 +179,7 @@ function adecauateFormatToCalculate(inValue){
     return entry
 }
 
-function getFactorial(entry){
-    
 
-}
 function addKeyValueToEntry(keyValue){
     var result=document.getElementById('input')
     result.value=result.value+keyValue
